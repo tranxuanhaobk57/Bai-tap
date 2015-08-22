@@ -1,0 +1,88 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package bai.pkg1;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Tran Xuan Hao
+ */
+public class Bai1 {
+
+    private static Object intputData;
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        int N, i;
+        Scanner inputData = new Scanner(System.in);
+        System.out.println("Nhap so luong Sinh Vien: ");
+        N = inputData.nextInt();
+        //khai bao
+        int[] maSoSinhVien = new int[N];//MSSV
+        String[] tenSinhVien = new String[N];//Khai bao mang ten sinh vien
+        int[] diemSinhVien = new int[N]; // Khai bao mang diem
+        // Nhap cac gia tri
+        for (i = 0; i < N; i++) {
+            System.out.println("Nhap MSSV ");
+            maSoSinhVien[i] = inputData.nextInt();//Nhap MSSV
+            System.out.println("Nhap ten Sinh Vien ");
+            tenSinhVien[i] = new Scanner(System.in).nextLine();// Nhap ten sinh vien
+            System.out.println("Nhap diem cho sinh vien");
+            diemSinhVien[i] = inputData.nextInt();// Nhap diem 
+        }
+        // Xuat ra mang hinh.
+        for (i = 0; i < N; i++) {
+            System.out.println(maSoSinhVien[i] + " " + tenSinhVien[i] + " " + diemSinhVien[i]);// Xuat MSSV
+        }
+        // Tra cuu sinh vien
+        String tenSV;
+        System.out.println("Nhap ten sinh vien can tim:");
+        tenSV = new Scanner(System.in).nextLine();
+        for (i = 0; i < N; i++) {
+            if (tenSinhVien[i].equals(tenSV)) {
+                System.out.println(maSoSinhVien[i] + " " + tenSinhVien[i] + " " + diemSinhVien[i]);
+                break;
+            } else {
+                System.out.println("Khong co sinh vien ten nhu vay");
+                break;
+            }
+        }
+        // Hien Thi So Diem Xuat Hien Nhieu
+        int[] a = new int[N];
+        for (i = 0; i < N; i++) {
+            a[i] = 0;
+        }// khoi tao 1 mang a toan phan tu 0
+        int[] dem = new int[N];
+        for (i = 0; i < N; i++) {
+            dem[i] = 1;
+        }// Khoi tao mang dem toan phan tu 0
+        // bat dau dem
+        for (i = 0; i < N; i++) {
+            if (a[i] == 0) {
+                a[i] = 1;
+                int j;
+                for (j = i + 1; j < N; j++) {
+                    if (diemSinhVien[i] == diemSinhVien[j]) {
+                        a[j] = 1;
+                        dem[i]++;
+                    }
+                }
+            }
+        }
+        int max = 0;int viTri=0;
+        for (i = 0; i < N; i++) {
+            if (max < dem[i]) {
+                max = dem[i];
+                viTri = i;
+            }
+        }
+        System.out.println("so diem nhieu nhat la"+diemSinhVien[viTri]+"voi"+max+"diem");
+    }
+}
